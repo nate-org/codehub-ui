@@ -48,8 +48,8 @@ node {
                     sh "ls -l"
                     sh 'ls "${scannerHome}"/bin/'
                     sh 'cat /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube_Scanner_2.8/conf/sonar-scanner.properties'
-                    //sh "${scannerHome}/bin/sonar-scanner -Dsonar.host.url=http://localhost:9000  -Dsonar.login=121d594f68b9cafd02f7433c0c992a3e19af02d3    -Dsonar.projectName=codehub-ui-base -Dsonar.projectVersion=1.0.0 -Dsonar.projectKey=codehub-ui-base -Dsonar.sources=."
-                    sh "${scannerHome}/bin/sonar-scanner -X -Dsonar.host.url=http://1cafac6b.ngrok.io -Dsonar.login=8661ed72cde7d82bc6c4bb25e80a6977cfad9670 -Dsonar.projectName=codehub-ui-base -Dsonar.projectVersion=1.0.0 -Dsonar.projectKey=codehub-ui-base -Dsonar.sources=."
+                    //sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectName=codehub-ui-base -Dsonar.projectVersion=1.0.0 -Dsonar.projectKey=codehub-ui-base -Dsonar.sources=."
+                    sh "${scannerHome}/bin/sonar-scanner -X  -Dsonar.projectName=codehub-ui-base -Dsonar.projectVersion=1.0.0 -Dsonar.projectKey=codehub-ui-base -Dsonar.sources=."
                 }
             }
         }
