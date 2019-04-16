@@ -79,7 +79,7 @@ node {
           script {
             withAWS(region:'us-east-1') {
               sh 'eval $(aws ecr get-login --no-include-email) > login'
-              //dockerImage=docker.build("$REGISTRY"+"$REGISTRY_REPO" + ":$BUILD_NUMBER")
+              dockerImage=docker.build("$REGISTRY"+"$REGISTRY_REPO" + ":$BUILD_NUMBER")
           }
             sh 'echo "Completing image build"'
           }
@@ -91,7 +91,7 @@ node {
           script {
             withAWS(region:'us-east-1') {
               sh 'eval $(aws ecr get-login --no-include-email) > login'
-              dockerImage.push()
+              //dockerImage.push()
           }
             sh 'echo "Completing image build"'
           }
