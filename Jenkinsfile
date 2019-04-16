@@ -77,7 +77,7 @@ node {
       stage('Build Codehub-UI Base Image') {
       dir ('App'){
           script {
-            withAWS(region:'eu-east-1') {
+            withAWS(role: 'codehub-cicd-service',region:'us-east-1') {
               dockerImage=docker.build("$REGISTRY"+"$REGISTRY_REPO" + ":$BUILD_NUMBER .")
           }
             sh 'echo "Completing image build"'
@@ -88,7 +88,7 @@ node {
       stage('Publish Codehub-UI Base Image') {
       dir ('App'){
           script {
-            withAWS(region:'eu-east-1') {
+            withAWS(role: 'codehub-cicd-service',region:'us-east-1') {
               dockerImage.push()
           }
             sh 'echo "Completing image build"'
