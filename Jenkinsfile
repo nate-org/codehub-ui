@@ -11,7 +11,7 @@ node {
       SONAR_HOST_URL='http://localhost:9000'
       SONAR_AUTH_TOKEN='121d594f68b9cafd02f7433c0c992a3e19af02d3'
     }
-    tools {nodejs "node"}
+    //tools {nodejs "node"}
      stage('Git Checkout') {
           deleteDir()
           dir ('App'){
