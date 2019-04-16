@@ -29,8 +29,6 @@ node {
 
       stage('Twistlock scan') {
           dir ('App'){
-             // sh "docker pull ${DOCKER_REGISTRY}/adms/${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}"
-             // twistlock("${DOCKER_REGISTRY}/adms/${DOCKER_IMAGE}", "${DOCKER_IMAGE_TAG}")
              sh 'Twistlock Scan is Sucessfully Completed!!'
             }
       }
