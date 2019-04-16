@@ -77,7 +77,7 @@ node {
       stage('Build Codehub-UI Base Image') {
           script {
             withAWS(region:'us-east-1') {
-              dockerImage=docker.build(registry+repo + ":$BUILD_NUMBER", "-f Dockerfile-Base .")
+              dockerImage=docker.build("$registry"+"$repo" + ":$BUILD_NUMBER", "-f Dockerfile-Base .")
           }
             sh 'echo "Completing image build"'
           }
