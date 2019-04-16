@@ -1,18 +1,22 @@
 {
     "family": "codehub-ui",
-    "containerDefinitions": [
-        {
-            "image": "797335914619.dkr.ecr.us-east-1.amazonaws.com/dev-codehub/codehub-ui:latest",
-            "name": "codehub-ui",
-            "cpu": 10,
-            "memory": 256,
-            "essential": true,
-            "portMappings": [
-                {
-                    "containerPort": 80,
-                    "hostPort": 0
-                }
-            ]
-        }
-    ]
+        "networkMode": "awsvpc",
+        "containerDefinitions": [
+            {
+                "name": "codehub-ui",
+                "image": "797335914619.dkr.ecr.us-east-1.amazonaws.com/dev-codehub/codehub-ui:latest",
+                "portMappings": [
+                  {
+                    "containerPort": 80
+                  }
+                ],
+                "essential": true
+            }
+        ],
+        "requiresCompatibilities": [
+            "FARGATE"
+        ],
+        "cpu": "256",
+        "memory": "512",
+        "executionRoleArn": "arn:aws:iam::797335914619:role/BAHServiceRoleForECSTaskExecution"
 }

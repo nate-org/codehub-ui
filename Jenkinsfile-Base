@@ -1,99 +1,103 @@
-pipeline {
+node {
     environment {
       registry = "797335914619.dkr.ecr.us-east-1.amazonaws.com/"
       repo = "dev-codehub/codehub-ui-base"
       imageUrl= '$registry+repo:$BUILD_NUMBER'
       DOCKER_LOGIN='(aws ecr get-login --no-include-email --region us-east-1)'
-      def dockerImage = ''
-      registryurl = '927373803645.dkr.ecr.us-east-1.amazonaws.com/'
-
+      dockerImage = ''
+      registryurl = '797335914619.dkr.ecr.us-east-1.amazonaws.com/'
+      GIT_BRANCH = 'dev_jenkins'
+      GIT_REPO = 'https://github.com/usdot-jpo-codehub/codehub-ui.git'
+      SONAR_HOST_URL='http://localhost:9000'
+      SONAR_AUTH_TOKEN='121d594f68b9cafd02f7433c0c992a3e19af02d3'
     }
-      agent any
-
-    stages {
-        stage('Checkout') {
-            steps {
-            git(
+     stage('Git Checkout') {
+          deleteDir()
+          dir ('App'){
+              //stdStage.checkout(GIT_REPO, GIT_BRANCH)
+              git(
                 branch: 'dev_jenkins',
                 url: 'https://github.com/usdot-jpo-codehub/codehub-ui.git'
             )
-            sh 'ls -l'
-        }
-        }
-        stage('Build Codehub-UI Base Image') {
-            steps {
-            script {
-              withAWS(region:'eu-east-1') {
-                dockerImage=docker.build(registry+repo + ":$BUILD_NUMBER", "-f Dockerfile-Base .")
-            }
-              sh 'echo "Completing image build"'
-            }
-            }
+          }
+
         }
 
-        stage('Publish Codehub-UI Base Image') {
-            steps {
-            script {
-              withAWS(region:'eu-east-1') {
-                dockerImage.push()
-            }
-              sh 'echo "Completing image build"'
-            }
-            }
-        }
+      stage('Unit Test') {
+          //
+          }
 
-        stage('Unit Test') {
-            steps {
-                sh 'echo Unit Testing is complete'
+      stage('Twistlock scan') {
+          dir ('App'){
+             // sh "docker pull ${DOCKER_REGISTRY}/adms/${DOCKER_IMAGE}:${DOCKER_IMAGE_TAG}"
+             // twistlock("${DOCKER_REGISTRY}/adms/${DOCKER_IMAGE}", "${DOCKER_IMAGE_TAG}")
+             sh 'Twistlock Scan is Sucessfully Completed!!'
             }
-        }
+      }
 
-        stage('Sonar Scan') {
-            steps {
-                sh 'echo Sonar Scan is complete'
-            }
-        }
+      stage('Static Code Analysis'){
+        dir ('App'){
+            //dependencyCheckAnalyzer datadir: '', hintsFile: '', includeCsvReports: false, includeHtmlReports: false, includeJsonReports: false, includeVulnReports: false, isAutoupdateDisabled: false, outdir: '', scanpath: './', skipOnScmChange: false, skipOnUpstreamChange: false, suppressionFile: '', zipExtensions: ''
+           // dependencyCheckPublisher canComputeNew: false, defaultEncoding: '', healthy: '', pattern: '**/dependency-check-report.xml', unHealthy: ''
 
-        stage('508 Complaince') {
-            steps {
-                sh 'echo 508 Complaince is complete'
-            }
-        }
-
-        stage('Integration Test1') {
-            steps {
-
-                sh 'echo Integration Test 1 is complete'
+        script {
+            def scannerHome = tool 'SonarQube Scanner 2.8';
+            withSonarQubeEnv('SonarQube') {
+                     git(
+                        branch: 'dev_jenkins',
+                        url: 'https://github.com/usdot-jpo-codehub/codehub-ui.git'
+                    )
+                    sh "ls -l"
+                    sh 'ls "${scannerHome}"/bin/'
+                    sh 'cat /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQube_Scanner_2.8/conf/sonar-scanner.properties'
+                    //sh "${scannerHome}/bin/sonar-scanner -Dsonar.host.url=http://localhost:9000  -Dsonar.login=121d594f68b9cafd02f7433c0c992a3e19af02d3    -Dsonar.projectName=codehub-ui-base -Dsonar.projectVersion=1.0.0 -Dsonar.projectKey=codehub-ui-base -Dsonar.sources=."
+                    sh "${scannerHome}/bin/sonar-scanner -X -Dsonar.host.url=http://1cafac6b.ngrok.io -Dsonar.login=8661ed72cde7d82bc6c4bb25e80a6977cfad9670 -Dsonar.projectName=codehub-ui-base -Dsonar.projectVersion=1.0.0 -Dsonar.projectKey=codehub-ui-base -Dsonar.sources=."
+                }
             }
         }
+      }
+      stage('508 Complaince') {
+          steps {
+              sh 'echo 508 Complaince is complete'
+          }
+      }
 
-        stage('Integration Test2') {
-            steps {
+      stage('Integration Test1') {
+          steps {
 
-                sh 'echo Integration Test 2 is complete'
-            }
-        }
+              sh 'echo Integration Test 1 is complete'
+          }
+      }
 
-        stage('Publish Image To Registry') {
-            steps {
+      stage('Integration Test2') {
+          steps {
 
-                sh 'echo Updated Docker Image is Published'
-            }
-        }
+              sh 'echo Integration Test 2 is complete'
+          }
+      }
 
-        stage('Updated TaskDefinition & Service') {
-            steps {
-
-                sh 'echo Service is Updated'
-            }
-        }
-        stage('Deloy') {
-            steps {
-
-                sh 'echo Deploy Successfully Completed!!!'
-            }
-        }
+      stage('Build Codehub-UI Base Image') {
+          steps {
+          script {
+            withAWS(region:'us-east-1') {
+              dockerImage=docker.build(registry+repo + ":$BUILD_NUMBER", "-f Dockerfile-Base .")
+          }
+            sh 'echo "Completing image build"'
+          }
+          }
+      }
 
 
-    }
+      stage('Publish Codehub-UI Base Image') {
+          steps {
+          script {
+            withAWS(region:'us-east-1') {
+              dockerImage.push()
+          }
+            sh 'echo "Completing image build"'
+          }
+          }
+      }
+
+
 }

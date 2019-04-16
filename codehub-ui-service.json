@@ -1,14 +1,27 @@
 {
-              "cluster": "codehub-ui-cluster",
-              "serviceName": "codehub-ui-service",
-              "taskDefinition": "codehub-ui",
-              "loadBalancers": [
-                  {
-                      "targetGroupArn":"arn:aws:elasticloadbalancing:us-east-1:797335914619:targetgroup/codehub-test-ui-target/4931547f6168bdd0",
-                      "containerName": "codehub-ui",
-                      "containerPort": 80
-                  }
-              ],
-              "desiredCount": 0,
-              "role": "BAHServiceRoleForECS"
+    "cluster": "codehub-ui-cluster",
+    "serviceName": "codehub-ui-service",
+    "taskDefinition": "codehub-ui",
+    "loadBalancers": [
+        {
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:797335914619:targetgroup/dev-codehub-external-target1/bb85dff3641e6077",
+            "containerName": "codehub-ui",
+            "containerPort": 80
+        }
+    ],
+    "launchType": "FARGATE",
+    "schedulingStrategy": "REPLICA",
+    "deploymentController": {
+        "type": "CODE_DEPLOY"
+    },
+    "platformVersion": "LATEST",
+    "networkConfiguration": {
+       "awsvpcConfiguration": {
+          "assignPublicIp": "DISABLED",
+          "securityGroups": [ "sg-0195b8748c970c554","sg-07d89bf37a22f548e"],
+          "subnets": [ "subnet-03399cc4ffc0360f8", "subnet-0140ca798da72bec0","subnet-0f007e614a11a8ea0","subnet-03e87d9cc426c1b50","subnet-0f3e307680d759757","subnet-00dc30c658524f4f5"]
+       }
+    },
+    "role": "BAHServiceRoleForECS",
+    "desiredCount": 1
 }
