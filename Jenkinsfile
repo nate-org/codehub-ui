@@ -92,7 +92,7 @@ node {
           script {
             withAWS(region:'us-east-1') {
               sh 'eval $(aws ecr get-login --no-include-email) > login'
-              //dockerImage.push()
+              dockerImage.push()
           }
             sh 'echo "Completing image build"'
           }

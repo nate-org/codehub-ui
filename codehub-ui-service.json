@@ -4,7 +4,7 @@
     "taskDefinition": "codehub-ui",
     "loadBalancers": [
         {
-            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:797335914619:targetgroup/dev-codehub-external-target1/bb85dff3641e6077",
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:797335914619:targetgroup/dev-codehub-external-target1/5d223024aef1ccfb",
             "containerName": "codehub-ui",
             "containerPort": 80
         }
