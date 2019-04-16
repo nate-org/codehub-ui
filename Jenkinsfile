@@ -108,7 +108,8 @@ node {
       }
       stage('Deploy Service') {
       dir ('App'){
-          script {
+      nodejs('node') {
+            script {
             SERVICE_NAME="codehub-ui-service"
             IMAGE_VERSION="$BUILD_NUMBER"
             TASK_FAMILY="codehub-ui"
@@ -121,6 +122,7 @@ node {
               sh 'aws deploy create-deployment --cli-input-json file://codehub-ui-create-deployment.json --region us-east-1'
           }
         }
+}
 }
 
 }
