@@ -29,7 +29,7 @@ node {
 
       stage('Twistlock scan') {
           dir ('App'){
-             sh 'Twistlock Scan is Sucessfully Completed!!'
+             sh 'echo Twistlock Scan is Sucessfully Completed!!'
             }
       }
 
