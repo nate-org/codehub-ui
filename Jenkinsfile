@@ -75,6 +75,7 @@ node {
       }
 
       stage('Build Codehub-UI Base Image') {
+      dir ('App'){
           script {
             withAWS(region:'eu-east-1') {
               dockerImage=docker.build("$REGISTRY"+"$REGISTRY_REPO" + ":$BUILD_NUMBER .")
@@ -82,9 +83,10 @@ node {
             sh 'echo "Completing image build"'
           }
       }
-
+}
 
       stage('Publish Codehub-UI Base Image') {
+      dir ('App'){
           script {
             withAWS(region:'eu-east-1') {
               dockerImage.push()
@@ -92,14 +94,17 @@ node {
             sh 'echo "Completing image build"'
           }
       }
-
+}
       stage('Update TaskDefinition') {
+      dir ('App'){
           script {
               sh 'aws ecs register-task-definition --cli-input-json file://codehub-ui-taskDefinition.json --region us-east-1'
               sh 'echo Service is Updated'
           }
       }
+      }
       stage('Deploy Service') {
+      dir ('App'){
           script {
             SERVICE_NAME="codehub-ui-service"
             IMAGE_VERSION="$BUILD_NUMBER"
@@ -113,6 +118,6 @@ node {
               sh 'aws deploy create-deployment --cli-input-json file://codehub-ui-create-deployment.json --region us-east-1'
           }
         }
-
+}
 
 }
