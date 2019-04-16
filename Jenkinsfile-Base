@@ -55,20 +55,20 @@ node {
         }
       }
       stage('508 Complaince') {
-          steps {
+          script {
               sh 'echo 508 Complaince is complete'
           }
       }
 
       stage('Integration Test1') {
-          steps {
+          script {
 
               sh 'echo Integration Test 1 is complete'
           }
       }
 
       stage('Integration Test2') {
-          steps {
+          script {
 
               sh 'echo Integration Test 2 is complete'
           }

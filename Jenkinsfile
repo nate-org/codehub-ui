@@ -55,20 +55,20 @@ node {
         }
       }
       stage('508 Complaince') {
-          steps {
+          script {
               sh 'echo 508 Complaince is complete'
           }
       }
 
       stage('Integration Test1') {
-          steps {
+          script {
 
               sh 'echo Integration Test 1 is complete'
           }
       }
 
       stage('Integration Test2') {
-          steps {
+          script {
 
               sh 'echo Integration Test 2 is complete'
           }
@@ -94,13 +94,12 @@ node {
       }
 
       stage('Update TaskDefinition') {
-          steps {
+          script {
               sh 'aws ecs register-task-definition --cli-input-json file://codehub-ui-taskDefinition.json --region us-east-1'
               sh 'echo Service is Updated'
           }
       }
       stage('Deploy Service') {
-          steps{
           script {
             SERVICE_NAME="codehub-ui-service"
             IMAGE_VERSION="$BUILD_NUMBER"
@@ -113,7 +112,6 @@ node {
               sh 'aws s3 cp appspec.yaml s3://codehub-ui/'
               sh 'aws deploy create-deployment --cli-input-json file://codehub-ui-create-deployment.json --region us-east-1'
           }
-        }
         }
 
 
