@@ -117,7 +117,7 @@ node {
               sh 'npm install js-yaml -g'
               sh 'npm install js-yaml'
               //sh 'aws ecs register-task-definition --cli-input-json file://codehub-ui-taskDefinition.json --region us-east-1'
-              sh 'node process_appspec.js $(aws ecs list-task-definitions --family-prefix codehub-ui | jq -r ".taskDefinitionArns[-1]")'
+              sh 'node process_appspec.js $(aws ecs list-task-definitions --region us-east-1 --family-prefix codehub-ui | jq -r ".taskDefinitionArns[-1]")'
               sh 'aws s3 cp appspec.yaml s3://codehub-ui/'
               sh 'aws deploy create-deployment --cli-input-json file://codehub-ui-create-deployment.json --region us-east-1'
           }
