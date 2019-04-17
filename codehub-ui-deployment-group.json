@@ -32,13 +32,13 @@
           ],
           "prodTrafficRoute": {
               "listenerArns": [
-                  "arn:aws:elasticloadbalancing:us-east-1:797335914619:listener/app/dev-codehub-external/46201fb1503e8738/8620823551293fac"
+                  "arn:aws:elasticloadbalancing:us-east-1:927373803645:listener/app/codehub-ui-dev-elb/73459d4e8049ec2d/5cba96d783ef07cc"
               ]
           }
         }
       ]
    },
-   "serviceRoleArn": "arn:aws:iam::797335914619:role/BAHCodeDeployRoleForECS",
+   "serviceRoleArn": "arn:aws:iam::927373803645:role/CodeDeployServiceRole",
    "ecsServices": [
        {
            "serviceName": "codehub-ui-service",
