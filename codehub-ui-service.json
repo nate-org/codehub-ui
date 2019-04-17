@@ -4,7 +4,7 @@
     "taskDefinition": "codehub-ui",
     "loadBalancers": [
         {
-            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:797335914619:targetgroup/dev-codehub-external-target1/5d223024aef1ccfb",
+            "targetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:927373803645:targetgroup/dev-codehub-ui-targets/7a8031f629106bf0",
             "containerName": "codehub-ui",
             "containerPort": 80
         }
@@ -18,10 +18,9 @@
     "networkConfiguration": {
        "awsvpcConfiguration": {
           "assignPublicIp": "DISABLED",
-          "securityGroups": [ "sg-0195b8748c970c554","sg-07d89bf37a22f548e"],
-          "subnets": [ "subnet-03399cc4ffc0360f8", "subnet-0140ca798da72bec0","subnet-0f007e614a11a8ea0","subnet-03e87d9cc426c1b50","subnet-0f3e307680d759757","subnet-00dc30c658524f4f5"]
+          "securityGroups": [ "sg-085b3d2ec61e4fb9b","sg-01f28d90d19f9b49b","sg-01f28d90d19f9b49b"],
+          "subnets": [ "subnet-009cb9d5607b8aa02", "subnet-04e108f9f6880fd78","subnet-0721f4a05ed5d1219","subnet-091fc2ed8ff4d0c9b"]
        }
     },
-    "role": "BAHServiceRoleForECS",
     "desiredCount": 1
 }
