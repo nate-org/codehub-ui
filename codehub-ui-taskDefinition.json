@@ -18,5 +18,5 @@
         ],
         "cpu": "256",
         "memory": "512",
-        "executionRoleArn": "arn:aws:iam::797335914619:role/BAHServiceRoleForECSTaskExecution"
+        "executionRoleArn": "arn:aws:iam::797335914619:role/BAHCodeDeployRoleForECS"
 }
