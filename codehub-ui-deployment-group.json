@@ -28,7 +28,7 @@
              },
              {
                  "name": "codehub-ui-target2"
-             }arn
+             }
           ],
           "prodTrafficRoute": {
               "listenerArns": [
