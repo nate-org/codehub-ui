@@ -24,15 +24,15 @@
         {
           "targetGroups": [
              {
-                 "name": "codehub-ui-target1"
+                 "name": "dev-codehub-external-target1"
              },
              {
-                 "name": "codehub-ui-target2"
+                 "name": "dev-codehub-external-target2"
              }
           ],
           "prodTrafficRoute": {
               "listenerArns": [
-                  "arn:aws:elasticloadbalancing:us-east-1:797335914619:listener/app/dev-codehub-external/46201fb1503e8738/8620823551293fac"
+                  "arn:aws:elasticloadbalancing:us-east-1:797335914619:listener/app/dev-codehub-external/850e4ebca6b9cee4/a99f5611681deefb"
               ]
           }
         }
