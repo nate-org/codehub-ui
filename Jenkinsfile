@@ -2,12 +2,12 @@ node {
     environment {
       registry = "927373803645.dkr.ecr.us-east-1.amazonaws.com/"
       repo = "dev-codehub/codehub-ui"
-      //927373803645.dkr.ecr.us-east-1.amazonaws.com/nate-docker-production/codehub-ui-updated
+      //797335914619.dkr.ecr.us-east-1.amazonaws.com/dev-codehub/codehub-ui:latest
       imageUrl= '$registry+repo:$BUILD_NUMBER'
       DOCKER_LOGIN='(aws ecr get-login --no-include-email --region us-east-1)'
       dockerImage = ''
       registryurl = '927373803645.dkr.ecr.us-east-1.amazonaws.com/'
-      GIT_BRANCH = 'development_bundler'
+      GIT_BRANCH = 'dev_updated'
       GIT_REPO = 'https://github.com/usdot-jpo-codehub/codehub-ui.git'
       SONAR_HOST_URL='http://localhost:9000'
       SONAR_AUTH_TOKEN='121d594f68b9cafd02f7433c0c992a3e19af02d3'
@@ -18,7 +18,7 @@ node {
           dir ('App'){
               //stdStage.checkout(GIT_REPO, GIT_BRANCH)
               git(
-                branch: 'development_bundler',
+                branch: 'dev_updated',
                 url: 'https://github.com/usdot-jpo-codehub/codehub-ui.git'
             )
           }
@@ -88,7 +88,7 @@ node {
           script {
             withAWS(region:'us-east-1') {
               sh 'eval $(aws ecr get-login --no-include-email) > login'
-              dockerImage=docker.build("927373803645.dkr.ecr.us-east-1.amazonaws.com/nate-docker-production/codehub-ui-updated" + ":latest")
+              dockerImage=docker.build("797335914619.dkr.ecr.us-east-1.amazonaws.com/dev-codehub/codehub-ui" + ":latest")
           }
             sh 'echo "Completing image build"'
           }

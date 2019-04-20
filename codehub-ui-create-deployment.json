@@ -4,7 +4,7 @@
     "revision": {
         "revisionType": "S3",
         "s3Location": {
-            "bucket": "codehub-prod-ui",
+            "bucket": "codehub-ui",
             "key": "appspec.yaml",
             "bundleType": "YAML"
         }
