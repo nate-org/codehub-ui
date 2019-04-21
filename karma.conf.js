@@ -44,7 +44,7 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    b  browsers: ['PhantomJS', 'PhantomJS_custom'],
+    browsers: ['PhantomJS', 'PhantomJS_custom'],
           customLaunchers: {
             'PhantomJS_custom': {
               base: 'PhantomJS',
@@ -61,7 +61,7 @@ module.exports = function(config) {
           phantomjsLauncher: {
             exitOnResourceError: true
           },
-    singleRun: false,
+      singleRun: false,
     // client.args must be a array of string.
     // Leave 'aurelia-root', project.paths.root in this order so we can find
     // the root of the aurelia project.
