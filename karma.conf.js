@@ -44,24 +44,19 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['PhantomJS', 'PhantomJS_custom'],
-          customLaunchers: {
-            'PhantomJS_custom': {
-              base: 'PhantomJS',
-              options: {
-                windowName: 'my-window',
-                settings: {
-                  webSecurityEnabled: false
-                },
-              },
-              flags: ['--load-images=true'],
-              debug: true
-            }
-          },
-          phantomjsLauncher: {
-            exitOnResourceError: true
-          },
-      singleRun: false,
+    customLaunchers: {
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: [
+          '--headless',
+          '--disable-gpu',
+          '--no-sandbox',
+          '--remote-debugging-port=9222'
+        ]
+      }
+    },
+    browsers: ['ChromeHeadless'],
+    singleRun: false,
     // client.args must be a array of string.
     // Leave 'aurelia-root', project.paths.root in this order so we can find
     // the root of the aurelia project.
