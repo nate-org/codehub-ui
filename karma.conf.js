@@ -47,7 +47,7 @@ module.exports = function(config) {
     autoWatch: false,
     customLaunchers: {
       ChromeHeadless: {
-        base: 'Chrome',
+        base: 'chromium',
         flags: [
           '--headless',
           '--disable-gpu',
