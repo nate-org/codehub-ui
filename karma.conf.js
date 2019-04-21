@@ -27,8 +27,7 @@ let files = [entryBundle]
 
 let transpilerOptions = project.transpiler.options;
 transpilerOptions.sourceMap = 'inline';
-const process = require('process');
-process.env.CHROME_BIN = require('puppeteer').executablePath();
+
 module.exports = function(config) {
   config.set({
     basePath: '',
@@ -45,19 +44,16 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    customLaunchers: {
-      ChromeHeadless: {
-        base: 'Chrome',
-        flags: [
-          '--headless',
-          '--disable-gpu',
-          '--no-sandbox',
-          '--remote-debugging-port=9222'
-        ]
-      }
-    },
     browsers: ['ChromeHeadless'],
-    singleRun: true,
+    browserDisconnectTimeout: 10000,
+    browserDisconnectTolerance: 3,
+    browserNoActivityTimeout: 60000,
+    flags: [
+      '--disable-web-security',
+      '--disable-gpu',
+      '--no-sandbox'
+    ],
+    singleRun: false,
     // client.args must be a array of string.
     // Leave 'aurelia-root', project.paths.root in this order so we can find
     // the root of the aurelia project.
