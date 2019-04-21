@@ -27,7 +27,7 @@ let files = [entryBundle]
 
 let transpilerOptions = project.transpiler.options;
 transpilerOptions.sourceMap = 'inline';
-
+process.env.CHROME_BIN = require('puppeteer').executablePath();
 module.exports = function(config) {
   config.set({
     basePath: '',
@@ -51,9 +51,11 @@ module.exports = function(config) {
     flags: [
       '--disable-web-security',
       '--disable-gpu',
-      '--no-sandbox'
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--remote-debugging-port=9222',
     ],
-    singleRun: false,
+    singleRun: true,
     // client.args must be a array of string.
     // Leave 'aurelia-root', project.paths.root in this order so we can find
     // the root of the aurelia project.
